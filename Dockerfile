@@ -78,7 +78,17 @@ RUN set -ex \
         ncurses-libs \
         readline \
     # add latest rebar
-    && git clone -b ${EMQ_VERSION} https://github.com/emqtt/emq-relx.git /emqttd \
+    && git clone -b ${EMQ_VERSION} https://github.com/emqtt/emq-relx.git /emqttd
+
+# add bridge plugin
+RUN set -ex \
+    && git clone https://github.com/BerkOzdilek/emqttd_plugin_kafka_bridge.git /emqttd/emq_kafka_bridge
+
+ADD files/Makefile /emqttd
+ADD files/relx.config /emqttd
+
+# build the project
+RUN set -ex \    
     && cd /emqttd \
     && make \
     && mkdir -p /opt && mv /emqttd/_rel/emqttd /opt/emqttd \
@@ -89,6 +99,12 @@ RUN set -ex \
     # removing fetch deps and build deps
     && apk --purge del .build-deps .fetch-deps \
     && rm -rf /var/cache/apk/*
+
+# configure broker
+ADD files/emq_auth_redis.conf /opt/emqttd/etc/plugins
+ENV EMQ_LOADED_PLUGINS=emq_kafka_bridge,emq_auth_redis,emq_recon,emq_modules,emq_retainer,emq_dashboard
+ENV EMQ_MQTT__ALLOW_ANONYMOUS=false
+ENV EMQ_MQTT__ACL_NOMATCH=deny
 
 WORKDIR /opt/emqttd
 
