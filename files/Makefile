@@ -50,8 +50,8 @@ dep_emq_elixir_plugin = git  https://github.com/emqtt/emq-elixir-plugin master
 NO_AUTOPATCH = emq_elixir_plugin
 
 # Kafka Bridge @berkozdilek
-DEPS += emq_kafka_bridge
-dep_emq_kafka_bridge = git https://github.com/BerkOzdilek/emqttd_plugin_kafka_bridge.git
+DEPS += emqttd_plugin_kafka_bridge
+dep_emqttd_plugin_kafka_bridge = git https://github.com/BerkOzdilek/emqttd_plugin_kafka_bridge.git master
 
 include erlang.mk
 

@@ -80,10 +80,6 @@ RUN set -ex \
     # add latest rebar
     && git clone -b ${EMQ_VERSION} https://github.com/emqtt/emq-relx.git /emqttd
 
-# add bridge plugin
-RUN set -ex \
-    && git clone https://github.com/BerkOzdilek/emqttd_plugin_kafka_bridge.git /emqttd/emq_kafka_bridge
-
 ADD files/Makefile /emqttd
 ADD files/relx.config /emqttd
 
@@ -102,7 +98,7 @@ RUN set -ex \
 
 # configure broker
 ADD files/emq_auth_redis.conf /opt/emqttd/etc/plugins
-ENV EMQ_LOADED_PLUGINS=emq_kafka_bridge,emq_auth_redis,emq_recon,emq_modules,emq_retainer,emq_dashboard
+ENV EMQ_LOADED_PLUGINS=emqttd_plugin_kafka_bridge,emq_auth_redis,emq_recon,emq_modules,emq_retainer,emq_dashboard
 ENV EMQ_MQTT__ALLOW_ANONYMOUS=false
 ENV EMQ_MQTT__ACL_NOMATCH=deny
 
