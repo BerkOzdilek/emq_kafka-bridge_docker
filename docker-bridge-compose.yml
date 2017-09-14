@@ -1,0 +1,13 @@
+version: '2'
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+  emqtt:
+    image: emq:bridge
+    ports:
+      - "1883:1883"
+      - "3000:18083"
+    environment:
+      EMQ_AUTH__REDIS__SERVER: redis:6379
