@@ -18,7 +18,7 @@ RUN set -ex \
 
 # configure broker
 ADD files/emq_auth_redis.conf /opt/emqttd/etc/plugins
-ENV EMQ_LOADED_PLUGINS=emqttd_plugin_kafka_bridge,emq_auth_redis,emq_recon,emq_modules,emq_retainer,emq_dashboard
+ENV EMQ_LOADED_PLUGINS=emq_kafka_bridge,emq_auth_redis,emq_recon,emq_modules,emq_retainer,emq_dashboard
 ENV EMQ_MQTT__ALLOW_ANONYMOUS=false
 ENV EMQ_MQTT__ACL_NOMATCH=deny
 
