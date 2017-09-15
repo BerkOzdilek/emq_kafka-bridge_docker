@@ -1,7 +1,7 @@
 FROM emq:base
 
-# RUN set -ex \
-#     && rm -rf /emqttd/deps/emq_kafka_bridge
+RUN set -ex \
+    && rm -rf /emqttd/deps/emq_kafka_bridge
     
 ADD files/Makefile /emqttd
 ADD files/relx.config /emqttd
