@@ -5,6 +5,7 @@ RUN set -ex \
     
 ADD files/Makefile /emqttd
 ADD files/relx.config /emqttd
+COPY emq_kafka_bridge /emqttd/deps/emq_kafka_bridge
 
 # build the project
 RUN set -ex \    
@@ -21,7 +22,7 @@ RUN set -ex \
 
 # configure broker
 # ADD files/emq_auth_redis.conf /opt/emqttd/etc/plugins
-ENV EMQ_LOADED_PLUGINS=emq_kafka_bridge,emq_recon,emq_retainer,emq_dashboard
+# ENV EMQ_LOADED_PLUGINS=emq_kafka_bridge,emq_recon,emq_retainer,emq_dashboard
 # ENV EMQ_MQTT__ALLOW_ANONYMOUS=false
 # ENV EMQ_MQTT__ACL_NOMATCH=deny
 
