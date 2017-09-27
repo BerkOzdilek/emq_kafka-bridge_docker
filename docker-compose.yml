@@ -1,7 +1,7 @@
 version: '2'
 services:
   emqtt:
-    build: .
+    image: emq:frombase
     ports:
       - "1883:1883"
       - "3000:18083"

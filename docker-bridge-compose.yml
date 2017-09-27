@@ -4,25 +4,29 @@ services:
     image: redis:latest
     ports:
       - "6379:6379"
-  zookeeper:
+  zookeeper2:
     image: wurstmeister/zookeeper
     ports:
       - "2181:2181"
-  kafka:
+  kafka2:
     image: wurstmeister/kafka
     ports:
       - "9092:9092"
+    links:
+      - zookeeper2
     environment:
       # KAFKA_ADVERTISED_HOST_NAME: 192.168.99.100
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-  emqtt:
-    image: emq:frombase
+      KAFKA_CREATE_TOPICS: "broker_message:1:1"
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper2:2181
+  emqtt2:
+    image: emqwithbridge
     ports:
       - "1883:1883"
       - "3000:18083"
+    links:
+      - kafka2
+      - redis
     environment:
-      EMQ_LOADED_PLUGINS: 'emq_recon,emq_retainer,emq_dashboard'
-      # EMQ_AUTH__REDIS__SERVER: redis:6379
-      EMQ_BRIDGE__KAFKA__SERVER: '35.159.7.143:9092'
+      EMQ_LOADED_PLUGINS: 'emq_kafka_bridge,emq_auth_redis,emq_recon,emq_retainer,emq_dashboard'
+      EMQ_AUTH__REDIS__SERVER: redis:6379
+      EMQ_BRIDGE__KAFKA__SERVER: 'kafka2:9092'

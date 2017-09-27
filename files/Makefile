@@ -52,8 +52,8 @@ dep_emq_lua_hook  = git https://github.com/emqtt/emq-lua-hook master
 
 # Kafka Bridge @berkozdilek
 DEPS += emq_kafka_bridge
-# dep_emq_kafka_bridge = git https://github.com/BerkOzdilek/emq_kafka_bridge master
-dep_emq_kafka_bridge = /emqttd/deps/emq_kafka_bridge
+dep_emq_kafka_bridge = git https://github.com/BerkOzdilek/emq_kafka_bridge master
+# dep_emq_kafka_bridge = /emqttd/deps/emq_kafka_bridge
 
 include erlang.mk
 
