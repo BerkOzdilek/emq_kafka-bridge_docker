@@ -78,7 +78,13 @@ RUN set -ex \
         ncurses-libs \
         readline \
     # add latest rebar
-    && git clone -b ${EMQ_VERSION} https://github.com/emqtt/emq-relx.git /emqttd \
+    && git clone -b ${EMQ_VERSION} https://github.com/emqtt/emq-relx.git /emqttd
+
+ADD files/Makefile /emqttd
+ADD files/relx.config /emqttd
+
+# build emqttd
+RUN set -ex \
     && cd /emqttd \
     && make \
     && mkdir -p /opt && mv /emqttd/_rel/emqttd /opt/emqttd \
