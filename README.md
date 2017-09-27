@@ -1,4 +1,9 @@
-# EMQ Docker
+Kafka bridge plugin added in files/Makefile
+
+
+
+Forked from emqttd/emq-docker
+## EMQ Docker
 
 *EMQ* (Erlang MQTT Broker) is a distributed, massively scalable, highly extensible MQTT message broker written in Erlang/OTP.
 
