@@ -1,0 +1,3 @@
+[submodule "emq_kafka_bridge"]
+	path = emq_kafka_bridge
+	url = https://github.com/BerkOzdilek/emq_kafka_bridge.git
